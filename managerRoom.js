@@ -7,7 +7,7 @@ module.exports = {
             filter: (structure) => {structure.type == STRUCTURE_EXTENSION}
         });
         var maxExtensions = CONTROLLER_STRUCTURES['extension'][lvl];
-        if(extensionsNb < maxExtensions && room.find(FIND_MY_CONSTRUCTION_SITES).length == 0) {
+        if(extensionsNb < maxExtensions && room.find(FIND_MY_CONSTRUCTION_SITES, {filter: (constructionSite) => {return constructionSite.structureType != STRUCTURE_ROAD}}).length == 0) {
             this.getNextPlace(room, spawn);
             while(room.createConstructionSite(room.memory.posLastExtension.x, room.memory.posLastExtension.y, STRUCTURE_EXTENSION) == ERR_INVALID_TARGET) {
                 this.getNextPlace(room, spawn);
