@@ -3,9 +3,13 @@ var roleUpgrader = require ('roleUpgrader');
 var roleBuilder = require ('roleBuilder');
 var roleRepairer = require ('roleRepairer');
 
-var typeGiveType = require ('typeGiveType');
+var typeCreep = require ('typeCreep');
 
 module.exports = {
+    init(room) {
+        room.memory.maxE = 0;
+    },
+    
     run(room, spawn) {
         /** free memory **/
         for(var name in Memory.creeps) {
@@ -22,7 +26,11 @@ module.exports = {
         var maxRepairers = 3;
         
         /** creep types **/
-        var workerType = typeGiveType.run(room, 'workerType');
+        if(room.memory.maxE != room.energyCapacityAvailable) {
+            typeCreep.updateTypes(room);
+            room.memory.maxE = room.energyCapacityAvailable;
+        }
+        var workerType = room.memory.workerType;
         var securityType =  [WORK, WORK, MOVE, CARRY];
         
         /** creep creation **/

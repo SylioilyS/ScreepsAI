@@ -1,3 +1,4 @@
+var init = require('init');
 var managerRoom = require('managerRoom');
 var managerCreeps = require('managerCreeps');
 
@@ -7,15 +8,14 @@ module.exports.loop = function () {
     
     /** Initialisation **/
     if(!room.memory.isInitialised) {
-        room.memory.isInitialised = true;
-        room.memory.posLastExtension = {x: spawn1.pos.x, y: spawn1.pos.y};
+        init.run(room, spawn1);
         console.log('AI initialised');
     }
     
-    /** Manage the room **/
-    managerRoom.run(room, spawn1);
-    
     /** Manage the creeps **/
     managerCreeps.run(room, spawn1);
+    
+    /** Manage the room **/
+    managerRoom.run(room, spawn1);
     
 }

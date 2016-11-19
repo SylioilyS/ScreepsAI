@@ -1,4 +1,8 @@
 module.exports = {
+    init(room, spawn) {
+        room.memory.posLastExtension = {x: spawn.pos.x, y: spawn.pos.y}
+    },
+    
     run(room, spawn) {
         var lvl = room.controller.level;
         
