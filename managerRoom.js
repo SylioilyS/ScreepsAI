@@ -8,8 +8,8 @@ module.exports = {
         
         /** Extension verification **/
         var extensionsNb = room.find(FIND_MY_STRUCTURES, {
-            filter: (structure) => {structure.type == STRUCTURE_EXTENSION}
-        });
+            filter: (structure) => {structure.structureType == STRUCTURE_EXTENSION}
+        }).length;
         var maxExtensions = CONTROLLER_STRUCTURES['extension'][lvl];
         if(extensionsNb < maxExtensions && room.find(FIND_MY_CONSTRUCTION_SITES, {filter: (constructionSite) => {return constructionSite.structureType != STRUCTURE_ROAD}}).length == 0) {
             this.getNextPlace(room, spawn);
